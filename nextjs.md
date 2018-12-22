@@ -58,3 +58,45 @@ import Link from "next/link";
 </Link>
 ```
 `next/link` does all the  handling for you.
+
+```
+import {withRouter} from 'next/router'
+
+const Page = withRouter((props) => (
+    <Layout>
+       <h1>{props.router.query.title}</h1>
+       <p>This is the blog post content.</p>
+    </Layout>
+))
+```
+
+- `?title=ThisIsParam` => `{props.router.query.title}` : `ThisIsParam`
+
+```
+import {withRouter} from 'next/router'
+import Layout from '../components/MyLayout.js'
+
+const Content = withRouter((props) => (
+  <div>
+    <h1>{props.router.query.title}</h1>
+    <p>This is the blog post content.</p>
+  </div>
+))
+
+const Page = (props) => (
+    <Layout>
+       <Content />
+    </Layout>
+)
+
+export default Page
+```
+
+### as 
+```
+ <Link as={`/p/${props.id}`} href={`/post?title=${props.title}`}>
+      <a>{props.title}</a>
+    </Link>
+```
+- it uses `history API`. 
+
