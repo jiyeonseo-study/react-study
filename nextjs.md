@@ -170,5 +170,58 @@ Post.getInitialProps = async function (context) {
 - That is why CSS needs to go inside of a template string. ({``}) 
 - CSS rules have no effect on elements inside of a child component.
   - or [global selectors](https://github.com/zeit/styled-jsx#one-off-global-selectors)
-  
-  
+```
+ <style jsx global>{`
+      .markdown {
+        font-family: "Arial";
+      }
+
+      .markdown a {
+        text-decoration: none;
+        color: blue;
+      }
+
+      .markdown a:hover {
+        opacity: 0.6;
+      }
+
+      .markdown h3 {
+        margin: 0;
+        padding: 0;
+        text-transform: uppercase;
+      }
+    `}</style>
+```
+- more detailed from https://github.com/zeit/styled-jsx 
+
+## Deploy
+- [Zeit Now](https://zeit.co/now)
+
+```
+// package.json
+"scripts": {
+  "start": "next start -p $PORT"
+}
+
+$ PORT=8000 npm start
+```
+
+### install Now
+```
+npm install -g now
+```
+more details - https://zeit.co/docs/v2/getting-started/installation/ 
+
+### new file `now.json` 
+```
+{
+  "version": 2,
+  "builds": [{ "src": "package.json", "use": "@now/next" }]
+}
+
+$ now 
+$ npm run build // deploy the app with the `.next` directory.
+```
+port 443 (the default port for "https" websites)
+
+
