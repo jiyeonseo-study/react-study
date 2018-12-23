@@ -101,7 +101,7 @@ export default Page
 - it uses `history API`. 
 
 ## Fetching Data
-### getInitialProps
+### server-rendered, getInitialProps
 ```
 const Index = props => {
   ...
@@ -120,3 +120,55 @@ Index.getInitialProps = async function() {
 export default Index;
 
 ```
+- server-rendered, so the console log is shown only on the server. 
+
+### Fetch Data in Client Side, getInitialProps
+```
+Post.getInitialProps = async function (context) {
+  const { id } = context.query
+  const res = await fetch(`https://api.tvmaze.com/shows/${id}`)
+  const show = await res.json()
+
+  console.log(`Fetched show: ${show.name}`)
+
+  return { show }
+}
+```
+
+- `context` 
+- [data fetching doc](https://github.com/zeit/next.js#fetching-data-and-component-lifecycle) 
+
+## Style
+
+```
+<style jsx>
+  h1, a {
+    font-family: "Arial";
+  }
+
+  ul {
+    padding: 0;
+  }
+
+  li {
+    list-style: none;
+    margin: 5px 0;
+  }
+
+  a {
+    text-decoration: none;
+    color: blue;
+  }
+
+  a:hover {
+    opacity: 0.6;
+  }
+</style>
+```
+
+- to use any dynamic variable inside styled-jsx
+- That is why CSS needs to go inside of a template string. ({``}) 
+- CSS rules have no effect on elements inside of a child component.
+  - or [global selectors](https://github.com/zeit/styled-jsx#one-off-global-selectors)
+  
+  
