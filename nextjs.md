@@ -224,4 +224,42 @@ $ npm run build // deploy the app with the `.next` directory.
 ```
 port 443 (the default port for "https" websites)
 
+## export
+create file `next.config.js` in the root path.
 
+```
+module.exports = {
+  exportPathMap: function () {
+    return {
+      '/': { page: '/' }
+    }
+  }
+}
+```
+- Next.js to export only the index (/) page. 
+
+add on `package.json`
+```
+"scripts": {
+    "export": "next export"
+}
+```
+
+- `npm run build && npm run export` 
+- exported HTML content in path `out/`
+- `cd out` and `serve -p 8080` with [serve](https://www.npmjs.com/package/serve) 
+
+- to export other pages 
+```
+module.exports = {
+  exportPathMap: function () {
+    return {
+      '/': { page: '/' },
+      '/about': { page: '/about' },
+      '/p/hello-nextjs': { page: '/post', query: { title: 'Hello Next.js' } },
+      '/p/learn-nextjs': { page: '/post', query: { title: 'Learn Next.js is awesome' } },
+      '/p/deploy-nextjs': { page: '/post', query: { title: 'Deploy apps with Zeit' } }
+    }
+  }
+}
+```
