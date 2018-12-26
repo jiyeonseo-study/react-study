@@ -263,3 +263,6 @@ module.exports = {
   }
 }
 ```
+- [more about next export](https://github.com/zeit/next.js#static-html-export) 
+
+## Lazy Loading Modules
